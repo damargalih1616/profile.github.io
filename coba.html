@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portofolio Mahasiswa Informatika Universitas Muhammadiyah Surakarta">
+    <title>Portofolio Mahasiswa Informatika</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', Arial, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            height: 100%;
+            overflow-x: hidden;
+            box-sizing: border-box;
+        }
+
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('bahan/background.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            filter: blur(1px);
+            z-index: -1;
+        }
+
+        nav {
+            background: linear-gradient(135deg, #000000, #6b6b6b);
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+
+        nav .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav .menu {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav .menu a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 1.1em;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        nav .menu a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.8em;
+            color: #fff;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: 60px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 200px;
+            z-index: 1001;
+        }
+
+        .mobile-menu a {
+            padding: 10px;
+            text-align: center;
+            display: block;
+            color: #333;
+            font-size: 1.2em;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .mobile-menu a:hover {
+            background-color: #313131;
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            nav .menu {
+                display: none;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .mobile-menu.show {
+                display: flex;
+            }
+        }
+        
+                /* Modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1001; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+        }
+
+        .modal-content p {
+            line-height: 1.6;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 1.5em;
+            color: #aaa;
+        }
+
+        .modal-close:hover {
+            color: #000;
+        }
+
+
+        .container {
+            padding: 100px 20px 50px;
+        }
+
+        .header, .section {
+            margin: 40px 0;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 2s ease-out;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .header img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #fff;
+            animation: scaleUp 1s ease-in-out;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .header h1, .header p, .section h2 {
+            text-align: center;
+        }
+
+        .header h1 {
+            margin-top: 20px;
+            font-size: 2.5em;
+        }
+
+        .header p {
+            font-size: 1.2em;
+        }
+
+        .social-media {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .social-media a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #333;
+            font-size: 1.5em;
+            transition: color 0.3s;
+        }
+
+        .social-media a:hover {
+            color: #007bff;
+        }
+
+        .skills, .org-history, .portfolio {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .skill, .org-item, .portfolio-item {
+            flex: 1 1 calc(33% - 20px);
+            max-width: calc(33% - 20px);
+            text-align: center;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            padding: 10px;
+            background-color: #fff;
+        }
+
+        .skill .skill-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .skill .skill-bar {
+            height: 20px;
+            background-color: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        .skill .skill-level {
+            height: 100%;
+            text-align: right;
+            padding-right: 10px;
+            color: white;
+            line-height: 20px;
+            border-radius: 10px;
+            transition: width 5s ease-in-out;
+        }
+
+        .skill .skill-level-90 { width: 90%; background-color: #4caf50; }
+        .skill .skill-level-80 { width: 80%; background-color: #2196f3; }
+        .skill .skill-level-85 { width: 85%; background-color: #ff9800; }
+        .skill .skill-level-95 { width: 95%; background-color: #f44336; }
+        .skill .skill-level-50 { width: 50%; background-color: #9c27b0; }
+
+        .org-item img, .portfolio-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .org-item:hover, .portfolio-item:hover {
+            transform: scale(1.05);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+        }
+
+        .modal-content p {
+            line-height: 1.6;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 1.5em;
+            color: #aaa;
+        }
+
+        .modal-close:hover {
+            color: #000;
+        }
+
+        /* Animation for fade-in effect */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Animation for slide-in effect */
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Class to apply fade-in animation */
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
+        /* Class to apply slide-in animation */
+        .slide-in {
+            opacity: 0;
+            animation: slideIn 1s forwards;
+        }
+
+        /* Ensure the section is visible */
+        .section.visible {
+            opacity: 1;
+        }
+
+
+        footer {
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            margin-top: 20px;
+            bottom: 0;
+            width: 100%;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleUp {
+            from { transform: scale(0.5); }
+            to { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+
+    <nav>
+        <a href="#" class="logo">Portofolio</a>
+        <div class="menu">
+            <a href="#home">Beranda</a>
+            <a href="#education">Pendidikan</a>
+            <a href="#organization">Organisasi</a>
+            <a href="#skills">Keterampilan</a>
+        </div>
+        <div class="hamburger"><i class="fas fa-bars"></i></div>
+        <div class="mobile-menu">
+            <a href="#home">Beranda</a>
+            <a href="#education">Pendidikan</a>
+            <a href="#organization">Organisasi</a>
+            <a href="#skills">Keterampilan</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header class="header" id="home">
+            <img src="bahan/profil.jpg" alt="Foto Profil">
+            <h1>Damar Galih Abdurrahman</h1>
+            <p>Mahasiswa Teknik Informatika Universitas Muhammadiyah Surakarta</p>
+            <div class="social-media">
+                <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </header>
+        <section class="section fade-in" id="about">
+            <h2>Tentang Saya</h2>
+            <p id="typing-effect"></p>
+        </section>
+        <section class="section slide-in" id="education">
+            <h2>Riwayat Pendidikan</h2>
+            <ul>
+                <li>Teknik Informatika, Universitas Muhammadiyah Surakarta, 2023 - Sekarang</li>
+                <li>SMA Negeri 1 Sambungmancan, 2020 - 2023</li>
+                <li>SMP Negeri 3 Waikabubak, 2017 - 2020</li>
+            </ul>
+        </section>
+
+        <section class="section slide-in" id="organization">
+            <h2>Pengalaman Organisasi</h2>
+            <div class="org-history">
+                <div class="org-item" onclick="openModal('org1')">
+                    <img src="bahan/org1.png" alt="Organisasi 1">
+                    <p>FOSTI</p>
+                </div>
+                <div class="org-item" onclick="openModal('org2')">
+                    <img src="bahan/org2.png" alt="Organisasi 2">
+                    <p>HIMATIF UMS</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Modal for Organization 1 -->
+        <div id="org1" class="modal">
+            <div class="modal-content">
+                <span class="modal-close" onclick="closeModal('org1')">&times;</span>
+                <h2>Forum Open Source Teknik Informatika UMS</h2>
+                <p>Anggota Divisi Keorganisasian</p>
+                <p>2023 - Sekarang</p>
+            </div>
+        </div>
+        
+        <!-- Modal for Organization 2 -->
+        <div id="org2" class="modal">
+            <div class="modal-content">
+                <span class="modal-close" onclick="closeModal('org2')">&times;</span>
+                <h2>Himpunan Mahasiswa Teknik Informatika UMS</h2>
+                <p>Anggota Bidang 4 ( Kaderisasi).</p>
+                <p>2023 - Sekarang</p>
+            </div>
+        </div>
+
+        <section class="section slide-in" id="skills">
+            <h2>Keterampilan</h2>
+            <div class="skills">
+                <div class="skill">
+                    <div class="skill-name">HTML</div>
+                    <div class="skill-bar">
+                        <div class="skill-level skill-level-90">90%</div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <div class="skill-name">CSS</div>
+                    <div class="skill-bar">
+                        <div class="skill-level skill-level-80">80%</div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <div class="skill-name">JavaScript</div>
+                    <div class="skill-bar">
+                        <div class="skill-level skill-level-85">85%</div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <div class="skill-name">Python</div>
+                    <div class="skill-bar">
+                        <div class="skill-level skill-level-95">95%</div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <div class="skill-name">SQL</div>
+                    <div class="skill-bar">
+                        <div class="skill-level skill-level-50">50%</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    <footer>
+        &copy; 2024 Nama Mahasiswa. All rights reserved.
+    </footer>
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+            function isElementInViewport(el) {
+                const rect = el.getBoundingClientRect();
+                return (
+                    rect.top >= 0 &&
+                    rect.left >= 0 &&
+                    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+                );
+            }
+
+            function handleScroll() {
+                const sections = document.querySelectorAll('.section');
+                sections.forEach(section => {
+                    if (isElementInViewport(section)) {
+                        section.classList.add('visible');
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', handleScroll);
+            handleScroll(); // Initial check
+        });
+
+        
+        function openModal(id) {
+            document.getElementById(id).style.display = "flex"; // Use flex to center the modal
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).style.display = "none";
+        }
+
+        // Optional: Close the modal when clicking outside of it
+        window.onclick = function(event) {
+            const modals = document.getElementsByClassName('modal');
+            for (let i = 0; i < modals.length; i++) {
+                if (event.target == modals[i]) {
+                    modals[i].style.display = "none";
+                }
+            }
+        }
+
+
+        // Function to create typing effect
+        function typeEffect(elementId, text, speed) {
+            let i = 0;
+            const element = document.getElementById(elementId);
+
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+
+            type();
+        }
+
+        // Call the typeEffect function
+        document.addEventListener('DOMContentLoaded', () => {
+            const text = "Saya adalah mahasiswa semester 3 jurusan Informatika di Universitas Muhammadiyah Surakarta. Saya memiliki ketertarikan yang mendalam dalam bidang teknologi dan pengembangan perangkat lunak. Selama waktu saya di universitas, saya telah terlibat dalam berbagai kegiatan yang memperluas pengetahuan dan keterampilan saya di bidang ini. Saya selalu mencari kesempatan untuk belajar lebih banyak dan mencoba hal yang baru.";
+            typeEffect('typing-effect', text, 20); // Speed in milliseconds
+        });
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const mobileMenu = document.querySelector('.mobile-menu');
+
+            hamburger.addEventListener('click', function() {
+                mobileMenu.classList.toggle('show');
+            });
+        });
+    </script>
+</body>
+</html>
